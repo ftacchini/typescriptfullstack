@@ -18,6 +18,8 @@ gise.isBestFriend = true;
 gise.age = 29;
 gise.call();
 
+gise.getHugged(matias, "thanks for the food");
+
 var randomGuyWalkingDownTheStreet = new Person("How would I know?");
 randomGuyWalkingDownTheStreet.age = 60;
 randomGuyWalkingDownTheStreet.lastName = "How would I know?";
