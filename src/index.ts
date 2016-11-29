@@ -12,7 +12,7 @@ matias.age = 1233;
 console.log(matias.fullName());
 
 var gise = new Buddy("434333");
-gise.name = "Gisela";
+gise.name = "Gisella";
 gise.lastName = "Tromer";
 gise.isBestFriend = true;
 gise.age = 29;
