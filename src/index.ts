@@ -1,38 +1,32 @@
 import * as express from "express";
-import { Buddy, IPerson } from "./friend";
-import { Person } from "./person";
+import * as mongodb from "mongodb";
+
+import { initializeDatabase } from "./db";
+
+import { FriendsRepository } from "./friends-repository";
+import { FriendsController } from "./friends-controller";
 
 var app = express();
 
-var matias = new Buddy("434333");
-matias.name = "Matias";
-matias.lastName = "Berlot";
-matias.isBestFriend = false;
-matias.age = 1233;
-console.log(matias.fullName());
 
-var gise = new Buddy("434333");
-gise.name = "Gisella";
-gise.lastName = "Tromer";
-gise.isBestFriend = true;
-gise.age = 29;
-gise.call();
+initializeDatabase((error: mongodb.MongoError, database: mongodb.Db) => {
 
-gise.getHugged(matias, "thanks for the food");
+  if(error){
+    console.error(error);
+    return;
+  }
 
-var randomGuyWalkingDownTheStreet = new Person("How would I know?");
-randomGuyWalkingDownTheStreet.age = 60;
-randomGuyWalkingDownTheStreet.lastName = "How would I know?";
-randomGuyWalkingDownTheStreet.name = "How would I know?";
+  console.log("Database initialized");
 
+  app.listen(3000, () => {
+    console.log('Example app listening on port 3000!')
+    initializeControllers(database, app);
+  });
 
-var friends: IPerson[] = [matias, gise, randomGuyWalkingDownTheStreet];
-
-
-app.get('/people', function (req: express.Request, res: express.Response) {
-  res.send(friends)
 });
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
-});
+function initializeControllers(database: mongodb.Db, app: express.Express){
+  var repository = new FriendsRepository(database)
+  var controller = new FriendsController(app, repository);
+  controller.initialize();
+}
