@@ -13,21 +13,21 @@ export class FriendsController {
 
         this.app.get("/friends", async (req: express.Request, res: express.Response) => {
             var repo = this.repository;
-            var friends = await repo.getFriends(req.query);
+            var friends = await repo.find(req.query);
 
             res.send(friends);
         })
         
         this.app.post("/friends", async (req: express.Request, res: express.Response) => {
             var repo = this.repository;
-            var friend = await repo.createFriend(req.body);
+            var friend = await repo.create(req.body);
 
             res.send(friend);
         })
         
         this.app.put("/friends", async (req: express.Request, res: express.Response) => {
             var repo = this.repository;
-            var response = await repo.updateFriend(req.query, req.body);
+            var response = await repo.updateOne(req.query, req.body);
 
             res.send(response);
         })

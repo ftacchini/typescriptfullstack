@@ -1,30 +1,19 @@
 import * as mongodb from "mongodb";
+import { Repository } from "../db/repository";
 import { Buddy } from "./friend";
 
-export class FriendsRepository {
+export class FriendsRepository extends Repository {
     constructor(
-        private database: mongodb.Db
+        database: mongodb.Db
     ){
+        super(database);
     }
 
-    private async getDatabaseConnection(): Promise<mongodb.Collection>{
-
-        var promise = new Promise<mongodb.Collection>((resolve, reject) => {
-            this.database.collection("friends", (error, friendsCollection) => {
-                if(error){
-                    reject(error);
-                }
-                else{
-                    resolve(friendsCollection);
-                }
-                
-            });
-        });
-
-        return promise;
+    protected get collectionName(): string {
+        return "friends";
     }
 
-    public async getFriends(query: any): Promise<Buddy[]> {
+    public async find(query: any): Promise<Buddy[]> {
 
         var friendsCollection = await this.getDatabaseConnection();
 
@@ -34,7 +23,7 @@ export class FriendsRepository {
         return friends;
     } 
 
-    public async updateFriend(query: any, friend: Object): Promise<mongodb.UpdateWriteOpResult> {
+    public async updateOne(query: any, friend: Object): Promise<mongodb.UpdateWriteOpResult> {
 
         var friendsCollection = await this.getDatabaseConnection();
         
@@ -44,7 +33,7 @@ export class FriendsRepository {
         return result;
     } 
 
-    public async createFriend(friend: Buddy): Promise<Buddy> {
+    public async create(friend: Buddy): Promise<Buddy> {
 
         var friendsCollection = await this.getDatabaseConnection();
         var result = await friendsCollection.insertOne(friend);
