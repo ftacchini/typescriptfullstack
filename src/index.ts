@@ -1,5 +1,6 @@
 import * as express from "express";
 import * as mongodb from "mongodb";
+import * as bodyParser from "body-parser";
 
 import { initializeDatabase } from "./db";
 
@@ -7,7 +8,7 @@ import { FriendsRepository } from "./friends-repository";
 import { FriendsController } from "./friends-controller";
 
 var app = express();
-
+app.use(bodyParser.json());
 
 initializeDatabase((error: mongodb.MongoError, database: mongodb.Db) => {
 

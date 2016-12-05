@@ -1,6 +1,7 @@
 export interface IPerson {
     readonly dni: string;
     age: number;
+    id: string;
     name: string;
     lastName: string;
     fullName(): string;
@@ -13,6 +14,7 @@ export class Person implements IPerson {
     constructor(public readonly dni: string){
     }
 
+    public id: string;
     public age: number;
     name: string;
 
