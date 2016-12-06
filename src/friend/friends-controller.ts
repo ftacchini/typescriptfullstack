@@ -1,5 +1,6 @@
 import { FriendsRepository } from "./friends-repository";
 import * as express from "Express";
+import * as _ from "lodash";
 
 export class FriendsController {
     constructor(
@@ -15,21 +16,27 @@ export class FriendsController {
             var repo = this.repository;
             var friends = await repo.find(req.query);
 
-            res.send(friends);
+            res.send(friends.map((friend) => { 
+                return friend.toJson()
+            }));
         })
         
         this.app.post("/friends", async (req: express.Request, res: express.Response) => {
             var repo = this.repository;
-            var friend = await repo.create(req.body);
+            var friend = await repo.createOne(req.body);
 
-            res.send(friend);
+            res.send(friend.toJson());
         })
         
         this.app.put("/friends", async (req: express.Request, res: express.Response) => {
             var repo = this.repository;
-            var response = await repo.updateOne(req.query, req.body);
-
-            res.send(response);
+            var toUpdate = await repo.findOne(req.query);
+            if(toUpdate){
+                _.assign(toUpdate, req.body);
+                var response = await repo.updateOne(toUpdate);
+            }
+            
+            res.send(response.toJson());
         })
     }
 }

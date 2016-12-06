@@ -1,10 +1,17 @@
 import * as mongodb from "mongodb";
+import {Model} from "../db/model";
 import {UsersRepository} from "./users-repository";
 
-export class User { 
+export class User extends Model { 
 
-    constructor(private repository: UsersRepository, data?: any){
-        data && ([this._id, this.facebook, this.picture, this.displayName] = data); 
+    constructor(repository: UsersRepository, data?: any){
+        super(repository);
+        if(data){
+            this._id = data._id;
+            this.facebook = data.facebook;
+            this.picture = data.picture;
+            this.displayName = data.displayName;
+        }
     }
 
     public _id: mongodb.ObjectID;
@@ -19,14 +26,5 @@ export class User {
             picture: this.picture,
             displayName: this.displayName
         };
-    }
-
-    public async save(): Promise<User>{
-        if(this._id){
-            return await this.repository.create(this);
-        }
-        else {
-            return await this.repository.update(this);
-        }
     }
 }
