@@ -1,6 +1,7 @@
 import { FriendsRepository } from "./friends-repository";
 import * as express from "Express";
 import * as _ from "lodash";
+import {Buddy} from "./friend";
 
 export class FriendsController {
     constructor(
@@ -23,8 +24,9 @@ export class FriendsController {
         
         this.app.post("/friends", async (req: express.Request, res: express.Response) => {
             var repo = this.repository;
-            var friend = await repo.createOne(req.body);
-
+            var friend = new Buddy(repo, req.body);
+            await friend.save();
+            
             res.send(friend.toJson());
         })
         

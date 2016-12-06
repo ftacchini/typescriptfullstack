@@ -12,10 +12,10 @@ export abstract class Model {
 
     public async save(): Promise<Model>{
         if(this._id){
-            return await this.repository.createOne(this);
+            return await this.repository.updateOne(this);
         }
         else {
-            return await this.repository.updateOne(this);
+            return await this.repository.createOne(this);
         }
     }
 }
