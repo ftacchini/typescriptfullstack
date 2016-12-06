@@ -7,6 +7,9 @@ import { initializeDatabase } from "./db/db";
 import { FriendsRepository } from "./friend/friends-repository";
 import { FriendsController } from "./friend/friends-controller";
 
+import { UsersRepository } from "./session/users-repository";
+import { LoginController } from "./session/login-controller";
+
 var app = express();
 app.use(bodyParser.json());
 
@@ -27,7 +30,11 @@ initializeDatabase((error: mongodb.MongoError, database: mongodb.Db) => {
 });
 
 function initializeControllers(database: mongodb.Db, app: express.Express){
-  var repository = new FriendsRepository(database)
-  var controller = new FriendsController(app, repository);
-  controller.initialize();
+  var friendsRepository = new FriendsRepository(database)
+  var friendsController = new FriendsController(app, friendsRepository);
+  friendsController.initialize();
+  
+  var usersRepository = new UsersRepository(database)
+  var loginController = new LoginController(app, usersRepository);
+  loginController.initialize();
 }

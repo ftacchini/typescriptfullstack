@@ -10,7 +10,7 @@ const config = {
     FACEBOOK_SECRET: "facebooksecret"
 }
 
-export class FriendsController {
+export class LoginController {
     constructor(
         private app: express.Express,
         private repository: UsersRepository
