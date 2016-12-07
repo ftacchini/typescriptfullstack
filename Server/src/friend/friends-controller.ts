@@ -13,7 +13,7 @@ export class FriendsController {
     
     public initialize(){
 
-        this.app.get("/friends", async (req: express.Request, res: express.Response) => {
+        this.app.get("/api/friends", async (req: express.Request, res: express.Response) => {
             var repo = this.repository;
             var friends = await repo.find(req.query);
 
