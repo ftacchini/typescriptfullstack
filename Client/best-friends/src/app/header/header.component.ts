@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
                 error: (error) => {
                   console.log('error')
                 },
-                complete(): (value: Response) => {
+                complete: () => {
                   console.log('test');
                 }
             });
