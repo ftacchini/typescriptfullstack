@@ -10,6 +10,7 @@ import { HeaderComponent } from './header/header.component';
 
 import {Ng2UiAuthModule, CustomConfig} from 'ng2-ui-auth';
 import {IOauth2Options} from '../../node_modules/ng2-ui-auth/src/config.service'
+import { FriendsService } from './friends.service';
 
 export const FACEBOOK_CLIENT_ID = '1145728795523925';
 export class MyAuthConfig extends CustomConfig {
@@ -34,7 +35,7 @@ export class MyAuthConfig extends CustomConfig {
     DataTableModule,
     Ng2UiAuthModule.getWithConfig(MyAuthConfig),
   ],
-  providers: [],
+  providers: [FriendsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

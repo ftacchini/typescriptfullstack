@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FriendsService } from '../friends.service';
 import {AuthService} from 'ng2-ui-auth';
+import {IFriend} from 'domain-models/IFriend';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css'],
-  providers: [FriendsService]
+  styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
   private isLogged: boolean = false;
+  private nameFilter: string;
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService, private friendsService: FriendsService) { }
 
   ngOnInit() {
   }
@@ -34,8 +35,9 @@ export class HeaderComponent implements OnInit {
     this.isLogged = false;
   }
 
-  search(friendName: string): void{
-    //implement
+  search(): void{
+    this.friendsService
+      .setFilter((friend: IFriend) => friend.name.indexOf(this.nameFilter) > -1 );
   }
 
 }

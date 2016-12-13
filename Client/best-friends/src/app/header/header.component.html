@@ -17,7 +17,7 @@
       </ul>
       <form class="navbar-form navbar-left" role="search">
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search friend by name">
+          <input type="text" name="nameFilter" [(ngModel)]="nameFilter" class="form-control" (keyup)="search()" placeholder="Search friend by name">
         </div>
       </form>
       <ul class="nav navbar-nav navbar-right">

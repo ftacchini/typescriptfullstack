@@ -1,4 +1,4 @@
-<p-dataTable [value]="friendList">
+<p-dataTable [value]="friendList | async">
     <p-column field="name" header="Name"></p-column>
     <p-column field="_id" header="ID"></p-column>
 </p-dataTable>
