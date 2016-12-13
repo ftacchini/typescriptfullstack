@@ -9,6 +9,7 @@ import {AuthService} from 'ng2-ui-auth';
   providers: [FriendsService]
 })
 export class HeaderComponent implements OnInit {
+  private isLogged: boolean = false;
 
   constructor(private auth: AuthService) { }
 
@@ -22,9 +23,15 @@ export class HeaderComponent implements OnInit {
                   console.log('error')
                 },
                 complete: () => {
+                  this.isLogged = true;
                   console.log('test');
                 }
             });
+  }
+
+  logout(): void{
+    this.auth.logout();
+    this.isLogged = false;
   }
 
   search(friendName: string): void{

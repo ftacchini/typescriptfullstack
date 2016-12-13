@@ -21,7 +21,8 @@
         </div>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#" (click)=login()>Login</a></li>
+        <li><a href="#" (click)=login() *ngIf="!isLogged">Login</a></li>
+        <li><a href="#" (click)=logout() *ngIf="isLogged">Log out</a></li>
       </ul>
     </div>
   </div>
