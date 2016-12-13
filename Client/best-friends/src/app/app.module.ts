@@ -11,7 +11,7 @@ import { HeaderComponent } from './header/header.component';
 import {Ng2UiAuthModule, CustomConfig} from 'ng2-ui-auth';
 import {IOauth2Options} from '../../node_modules/ng2-ui-auth/src/config.service'
 
-export const FACEBOOK_CLIENT_ID = '1032614643514243';
+export const FACEBOOK_CLIENT_ID = '1145728795523925';
 export class MyAuthConfig extends CustomConfig {
     defaultHeaders = {'Content-Type': 'application/json'};
     providers: { [provider: string]: IOauth2Options } = {

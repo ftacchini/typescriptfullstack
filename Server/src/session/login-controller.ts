@@ -7,7 +7,7 @@ import * as moment from "moment";
 
 const config = {
     TOKEN_SECRET: "tokensecret",
-    FACEBOOK_SECRET: "f346fc140808bb1e5d4440c601a43590"
+    FACEBOOK_SECRET: "9e534704a7c5b849e30a994bfc828cf0"
 }
 
 export class LoginController {
@@ -29,7 +29,8 @@ export class LoginController {
 
     public initialize() {
 
-        this.app.get('/api/auth/facebook', async (req: express.Request, res: express.Response) => {
+        this.app.post('/auth/facebook', async (req: express.Request, res: express.Response) => {
+            console.log("Im being called");
             var fields = ['id', 'email', 'first_name', 'last_name', 'link', 'name'];
             var accessTokenUrl = 'https://graph.facebook.com/v2.5/oauth/access_token';
             var graphApiUrl = 'https://graph.facebook.com/v2.5/me?fields=' + fields.join(',');
