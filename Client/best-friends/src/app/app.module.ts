@@ -5,16 +5,34 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { FriendListComponent } from './friend-list/friend-list.component';
+import {DataTableModule} from 'primeng/primeng';
+import { HeaderComponent } from './header/header.component';
+
+import {Ng2UiAuthModule, CustomConfig} from 'ng2-ui-auth';
+import {IOauth2Options} from '../../node_modules/ng2-ui-auth/src/config.service'
+
+export const FACEBOOK_CLIENT_ID = '1032614643514243';
+export class MyAuthConfig extends CustomConfig {
+    defaultHeaders = {'Content-Type': 'application/json'};
+    providers: { [provider: string]: IOauth2Options } = {
+      facebook: {
+        clientId: FACEBOOK_CLIENT_ID
+      }
+    };
+}
 
 @NgModule({
   declarations: [
     AppComponent,
-    FriendListComponent
+    FriendListComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    DataTableModule,
+    Ng2UiAuthModule.getWithConfig(MyAuthConfig),
   ],
   providers: [],
   bootstrap: [AppComponent]

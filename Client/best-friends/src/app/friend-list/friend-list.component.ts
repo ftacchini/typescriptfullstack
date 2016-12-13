@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FriendsService } from '../friends.service';
+import {IFriend} from 'domain-models/IFriend';
 
 @Component({
   selector: 'app-friend-list',
@@ -9,7 +10,7 @@ import { FriendsService } from '../friends.service';
 })
 export class FriendListComponent implements OnInit {
 
-  public friendList: any[];
+  public friendList: IFriend[];
 
   constructor(private friendService: FriendsService) { }
 

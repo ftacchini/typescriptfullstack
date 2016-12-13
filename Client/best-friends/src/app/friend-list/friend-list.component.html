@@ -1,8 +1,4 @@
-<p>
-  friend-list works!
-</p>
-  <ul>
-    <li *ngFor="let friend of friendList">
-      {{friend.name}}
-    </li>
-  </ul>
+<p-dataTable [value]="friendList">
+    <p-column field="name" header="Name"></p-column>
+    <p-column field="_id" header="ID"></p-column>
+</p-dataTable>

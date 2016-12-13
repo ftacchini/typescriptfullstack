@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
+import {IFriend} from 'domain-models/IFriend';
 
 import { Observable } from 'rxjs/Observable';
 
@@ -10,7 +11,7 @@ export class FriendsService {
 
   constructor (private http: Http) {}
 
-  getHeroes (): Observable<any[]> {
+  getHeroes (): Observable<IFriend[]> {
     return this.http.get(this.friendsUrl)
                     .map(this.extractData);
   }
