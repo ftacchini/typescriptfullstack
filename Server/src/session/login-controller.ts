@@ -97,10 +97,12 @@ export class LoginController {
     }
 
     private getFriends(user: User, accessToken: any){
-        var requestUrl = `/v2.8/${user.facebook}/friends`;
+        var requestUrl = `https://graph.facebook.com/v2.8/${user.facebook}/friends`;
 
-        request.get({ url: requestUrl, qs: accessToken, json: true }, async (err, response) => {
-            console.log(response);
+        request.get({ url: requestUrl, qs: accessToken, json: true }, async (err, response, friends) => {
+            //There is a problem with this, and now we cant get all user friends
+            console.log(err);
+            console.log(friends.data);
         });
     }
 }
