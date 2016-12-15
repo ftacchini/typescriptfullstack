@@ -5,7 +5,7 @@ import {IFriend} from 'domain-models/IFriend';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
-  selector: 'app-friend-list',
+  selector: 'friend-list',
   templateUrl: './friend-list.component.html',
   styleUrls: ['./friend-list.component.css']
 })
@@ -16,6 +16,7 @@ export class FriendListComponent implements OnInit {
   constructor(private friendService: FriendsService) { }
 
   ngOnInit() {
+    this.friendService.getFriends();
     this.getFriendList();
   }
 

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Response } from '@angular/http';
 import {IFriend} from 'domain-models/IFriend';
 
+import { JwtHttp } from 'ng2-ui-auth';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
@@ -9,12 +10,11 @@ import { Subject } from 'rxjs/Subject';
 export class FriendsService {
 
   private friendsUrl: string = 'http://localhost:4200/api/friends'; 
-  private data: IFriend[];
+  private data: IFriend[] = [];
   private filter: (friend: IFriend) => boolean = (friend: IFriend) => true;
   private friendsSubject = new Subject<IFriend[]>();
   
-  constructor (private http: Http) {
-    this.getFriends();
+  constructor (private http: JwtHttp) {
   }
 
   public friendsSource = this.friendsSubject.asObservable()

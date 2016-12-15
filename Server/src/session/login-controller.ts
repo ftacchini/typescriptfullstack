@@ -4,11 +4,7 @@ import * as request from "request";
 import * as jwt from "jwt-simple";
 import * as express from "Express";
 import * as moment from "moment";
-
-const config = {
-    TOKEN_SECRET: "tokensecret",
-    FACEBOOK_SECRET: "9e534704a7c5b849e30a994bfc828cf0"
-}
+import { config } from "../auth/auth-config";
 
 export class LoginController {
     constructor(

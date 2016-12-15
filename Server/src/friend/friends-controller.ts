@@ -22,7 +22,7 @@ export class FriendsController {
             }));
         })
         
-        this.app.post("/friends", async (req: express.Request, res: express.Response) => {
+        this.app.post("/api/friends", async (req: express.Request, res: express.Response) => {
             var repo = this.repository;
             var friend = new Buddy(repo, req.body);
             await friend.save();
@@ -30,7 +30,7 @@ export class FriendsController {
             res.send(friend.toJson());
         })
         
-        this.app.put("/friends", async (req: express.Request, res: express.Response) => {
+        this.app.put("/api/friends", async (req: express.Request, res: express.Response) => {
             var repo = this.repository;
             var toUpdate = await repo.findOne(req.query);
             if(toUpdate){

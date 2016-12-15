@@ -4,6 +4,8 @@ import * as bodyParser from "body-parser";
 
 import { initializeDatabase } from "./db/db";
 
+import { loggedPolicy } from "./auth/logged-policy";
+
 import { FriendsRepository } from "./friend/friends-repository";
 import { FriendsController } from "./friend/friends-controller";
 
@@ -12,6 +14,7 @@ import { LoginController } from "./session/login-controller";
 
 var app = express();
 app.use(bodyParser.json());
+loggedPolicy(app);
 
 initializeDatabase((error: mongodb.MongoError, database: mongodb.Db) => {
 
@@ -21,10 +24,10 @@ initializeDatabase((error: mongodb.MongoError, database: mongodb.Db) => {
   }
 
   console.log("Database initialized");
+  initializeControllers(database, app);
 
   app.listen(3000, () => {
-    console.log('Example app listening on port 3000!')
-    initializeControllers(database, app);
+    console.log('Example app listening on port 3000!');
   });
 
 });
