@@ -46,7 +46,7 @@ export abstract class Repository<T extends Model> {
         query._id && (query._id = new mongodb.ObjectID(query._id));
         var result = await collection.findOne(query || {});
 
-        return this.createModel(result);
+        return result && this.createModel(result);
     } 
 
     public async findById(id: string): Promise<T> {
@@ -54,7 +54,7 @@ export abstract class Repository<T extends Model> {
         var collection = await this.getDatabaseConnection();
         var result = await collection.findOne({_id: new mongodb.ObjectID(id)});
 
-        return this.createModel(result);
+        return result && this.createModel(result);
     } 
 
     public async createOne(model: T): Promise<T> {

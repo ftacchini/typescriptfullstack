@@ -38,6 +38,6 @@ function initializeControllers(database: mongodb.Db, app: express.Express){
   friendsController.initialize();
   
   var usersRepository = new UsersRepository(database)
-  var loginController = new LoginController(app, usersRepository);
+  var loginController = new LoginController(app, usersRepository, friendsRepository);
   loginController.initialize();
 }
